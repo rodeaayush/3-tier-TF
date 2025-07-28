@@ -3,7 +3,7 @@ variable "vpc_id" {
 }
 
 variable "SG" {
-  type = string
+  type = list(string)
 }
 variable "private-tom" {
   type = string

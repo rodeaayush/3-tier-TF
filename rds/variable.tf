@@ -3,5 +3,5 @@ variable "subnet_ID" {
 }
 
 variable "SG" {
-  type = string
+  type = list(string)
 }

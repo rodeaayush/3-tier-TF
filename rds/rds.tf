@@ -7,7 +7,7 @@ resource "aws_db_instance" "rds" {
   allocated_storage = 20
   db_name = "database1"
   engine = "mariadb"
-  engine_version = "10.11.6"
+  engine_version = "11.4.5"
   username = data.aws_ssm_parameter.username.value
   password = data.aws_ssm_parameter.db_password.value
   

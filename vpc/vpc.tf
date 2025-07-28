@@ -28,7 +28,7 @@ resource "aws_subnet" "private-tom" {
 resource "aws_subnet" "private-db" {
     vpc_id = aws_vpc.vnet.id
     cidr_block = "192.168.2.0/24"
-    availability_zone = "ap-south-1c"
+    availability_zone = "ap-south-1b"
     map_public_ip_on_launch = false
     tags = {
         Name = "Private-Subnet-Database"

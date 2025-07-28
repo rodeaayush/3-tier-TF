@@ -21,3 +21,4 @@ resource "aws_db_instance" "rds" {
     Name = "DB-Instance"
   }
 }
+

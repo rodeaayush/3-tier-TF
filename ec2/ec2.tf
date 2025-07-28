@@ -49,7 +49,7 @@ resource "aws_instance" "vm-tom" {
 resource "aws_security_group" "demo-sg" {
     name = "three-tier-sg"
     description = "allow ports ssh db tomcat and http to instance"
-    vpc_id = aws_vpc.vnet.id
+    vpc_id = var.vpc_id
     ingress {
         from_port = 22
         to_port = 22

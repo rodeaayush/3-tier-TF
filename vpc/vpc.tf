@@ -14,6 +14,9 @@ resource "aws_subnet" "public" {
         Name = "Public-Subnet"
     }
 }
+output "vpc_id" {
+  value = aws_vpc.vnet.id
+}
 
 resource "aws_subnet" "private-tom" {
     vpc_id = aws_vpc.vnet.id
@@ -34,6 +37,13 @@ resource "aws_subnet" "private-db" {
     tags = {
         Name = "Private-Subnet-Database"
     }
+}
+
+output "private_subnet_ids" {
+  value = [
+    aws_subnet.private-tom.id,
+    aws_subnet.private-db.id
+  ]
 }
 
 resource "aws_internet_gateway" "igw-demo" {

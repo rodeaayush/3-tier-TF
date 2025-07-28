@@ -18,7 +18,7 @@ resource "aws_subnet" "public" {
 resource "aws_subnet" "private-tom" {
     vpc_id = aws_vpc.vnet.id
     cidr_block = "192.168.1.0/24"
-    availability_zone = "ap-south-1b"
+    availability_zone = "ap-south-1a"
     map_public_ip_on_launch = false
     tags = {
         Name = "Private-Subnet-Tomcat"

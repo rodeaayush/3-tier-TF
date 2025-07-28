@@ -8,7 +8,7 @@ resource "aws_db_instance" "rds" {
   db_name = "database1"
   engine = "mariadb"
   engine_version = "10.11.6"
-  username = data.aws_ssm_parameter.db_username.value
+  username = data.aws_ssm_parameter.username.value
   password = data.aws_ssm_parameter.db_password.value
   
   instance_class = "db.t3.micro"

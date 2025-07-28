@@ -2,12 +2,12 @@ variable "vpc_id" {
   type = string
 }
 
-variable "private-tom" {
+variable "private_tom" {
   type = string
 }
-variable "private-db" {
+variable "private_db" {
   type = string
 }
-variable "public-nginx" {
+variable "public_nginx" {
   type = string
 }

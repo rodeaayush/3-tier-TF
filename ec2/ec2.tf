@@ -1,48 +1,3 @@
-resource "aws_instance" "vm-nginx" {
-    ami = "ami-0d0ad8bb301edb745"
-    instance_type = "t2.micro"
-    subnet_id = var.public-nginx
-    vpc_security_group_ids = aws_security_group.demo-sg.id
-    key_name = "ubuntukey"
-
-    tags = {
-        Name = "Nginx-Instance"
-    }
-    user_data = <<-EOF
-    #!/bin/bash
-    sudo -i
-    yum update -y
-    yum install nginx -y
-    systemctl start nginx
-    systemctl enable nginx
-    EOF
-
-}
-
-resource "aws_instance" "vm-db" {
-    ami = "ami-0d0ad8bb301edb745"
-    instance_type = "t2.micro"
-    subnet_id = var.private-db
-    vpc_security_group_ids = aws_security_group.demo-sg.id
-    key_name = "ubuntukey"
-
-    tags = {
-        Name = "Database-Instance"
-    }
-}
-
-resource "aws_instance" "vm-tom" {
-    ami = "ami-0d0ad8bb301edb745"
-    instance_type = "t2.micro"
-    subnet_id = var.private-tom
-    vpc_security_group_ids = aws_security_group.demo-sg.id
-    key_name = "ubuntukey"
-
-    tags = {
-        Name = "Tomcat-Instance"
-    }
-}
-
 
 resource "aws_security_group" "demo-sg" {
     name = "three-tier-sg"
@@ -86,4 +41,48 @@ resource "aws_security_group" "demo-sg" {
 
 output "common-sg" {
   value = aws_security_group.demo-sg.id
+}
+resource "aws_instance" "vm-nginx" {
+    ami = "ami-0d0ad8bb301edb745"
+    instance_type = "t2.micro"
+    subnet_id = var.public_nginx
+    vpc_security_group_ids = [aws_security_group.demo-sg.id]
+    key_name = "ubuntukey"
+
+    tags = {
+        Name = "Nginx-Instance"
+    }
+    user_data = <<-EOF
+    #!/bin/bash
+    sudo -i
+    yum update -y
+    yum install nginx -y
+    systemctl start nginx
+    systemctl enable nginx
+    EOF
+
+}
+
+resource "aws_instance" "vm-db" {
+    ami = "ami-0d0ad8bb301edb745"
+    instance_type = "t2.micro"
+    subnet_id = var.private_db
+    vpc_security_group_ids = [aws_security_group.demo-sg.id]
+    key_name = "ubuntukey"
+
+    tags = {
+        Name = "Database-Instance"
+    }
+}
+
+resource "aws_instance" "vm-tom" {
+    ami = "ami-0d0ad8bb301edb745"
+    instance_type = "t2.micro"
+    subnet_id = var.private_tom
+    vpc_security_group_ids = [aws_security_group.demo-sg.id]
+    key_name = "ubuntukey"
+
+    tags = {
+        Name = "Tomcat-Instance"
+    }
 }

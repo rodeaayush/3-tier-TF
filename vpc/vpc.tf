@@ -53,6 +53,15 @@ resource "aws_route_table" "RT-public" {
         gateway_id = aws_internet_gateway.igw-demo.id
     }
 }
+resource "aws_eip" "eip" {
+ domain = "vpc"
+}
+
+
+resource "aws_nat_gateway" "nat-vpc-tf" {
+  allocation_id = aws_eip.eip.id
+  subnet_id = aws_subnet.public.id
+}
 
 resource "aws_route_table" "RT-private" {
     vpc_id = aws_vpc.vnet.id
@@ -65,15 +74,6 @@ resource "aws_route_table" "RT-private" {
 }
 }
 
-resource "aws_eip" "eip" {
- domain = "vpc"
-}
-
-
-resource "aws_nat_gateway" "nat-vpc-tf" {
-  allocation_id = aws_eip.eip.id
-  subnet_id = aws_subnet.public.id
-}
 resource "aws_route_table_association" "rt-public" {
     subnet_id = aws_subnet.public.id
     route_table_id = aws_route_table.RT-public.id

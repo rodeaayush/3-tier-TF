@@ -14,9 +14,6 @@ resource "aws_subnet" "public" {
         Name = "Public-Subnet"
     }
 }
-output "vpc_id" {
-  value = aws_vpc.vnet.id
-}
 
 resource "aws_subnet" "private-tom" {
     vpc_id = aws_vpc.vnet.id
@@ -28,7 +25,6 @@ resource "aws_subnet" "private-tom" {
     }
 }
 
-
 resource "aws_subnet" "private-db" {
     vpc_id = aws_vpc.vnet.id
     cidr_block = "192.168.2.0/24"
@@ -37,13 +33,6 @@ resource "aws_subnet" "private-db" {
     tags = {
         Name = "Private-Subnet-Database"
     }
-}
-
-output "private_subnet_ids" {
-  value = [
-    aws_subnet.private-tom.id,
-    aws_subnet.private-db.id
-  ]
 }
 
 resource "aws_internet_gateway" "igw-demo" {
@@ -97,4 +86,29 @@ resource "aws_route_table_association" "rt-private" {
 resource "aws_route_table_association" "rt-private-db" {
     subnet_id = aws_subnet.private-db.id
     route_table_id = aws_route_table.RT-private.id
+}
+
+output "private_subnet_ids" {
+  value = [
+    aws_subnet.private-tom.id,
+    aws_subnet.private-db.id
+  ]
+}
+
+output "vpc_id" {
+  value = aws_vpc.vnet.id
+}
+
+output "public_subnet_id" {
+  value = aws_subnet.public.id
+}
+
+output "private_subnet_id" {
+  value = aws_subnet.private-tom.id
+  
+}
+
+output "private_db_subnet_id" {
+  value = aws_subnet.private-db.id
+  
 }

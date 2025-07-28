@@ -1,6 +1,6 @@
 resource "aws_db_subnet_group" "db-subnet" {
   name = "db-subnet"
-  subnet_ids = [aws_subnet.private-tom.id,aws_subnet.private-db.id]
+  subnet_ids = var.subnet_ID
 }
 
 resource "aws_db_instance" "rds" {
@@ -15,7 +15,7 @@ resource "aws_db_instance" "rds" {
   skip_final_snapshot = true
   db_subnet_group_name = aws_db_subnet_group.db-subnet.name
 
-  vpc_security_group_ids = [aws_security_group.demo-sg.id]
+  vpc_security_group_ids = var.SG.id
 
   tags = {
     Name = "DB-Instance"

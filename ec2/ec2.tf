@@ -1,9 +1,8 @@
-
 resource "aws_instance" "vm-nginx" {
     ami = "ami-0d0ad8bb301edb745"
     instance_type = "t2.micro"
-    subnet_id = aws_subnet.public.id
-    vpc_security_group_ids = [aws_security_group.demo-sg.id]
+    subnet_id = var.public-nginx.id
+    vpc_security_group_ids = var.SG.id
     key_name = "ubuntukey"
 
     tags = {
@@ -20,12 +19,11 @@ resource "aws_instance" "vm-nginx" {
 
 }
 
-
 resource "aws_instance" "vm-db" {
     ami = "ami-0d0ad8bb301edb745"
     instance_type = "t2.micro"
-    subnet_id = aws_subnet.private-db.id
-    vpc_security_group_ids = [aws_security_group.demo-sg.id]
+    subnet_id = var.private-db.id
+    vpc_security_group_ids = var.SG.id
     key_name = "ubuntukey"
 
     tags = {
@@ -36,8 +34,8 @@ resource "aws_instance" "vm-db" {
 resource "aws_instance" "vm-tom" {
     ami = "ami-0d0ad8bb301edb745"
     instance_type = "t2.micro"
-    subnet_id = aws_subnet.private-tom.id
-    vpc_security_group_ids = [aws_security_group.demo-sg.id]
+    subnet_id = var.private-tom.id
+    vpc_security_group_ids = var.SG.id
     key_name = "ubuntukey"
 
     tags = {
@@ -84,4 +82,9 @@ resource "aws_security_group" "demo-sg" {
     tags = {
         Name = "three-tier-sg"
     }
+}
+
+
+output "common-sg" {
+  value = aws_security_group.demo-sg.id
 }

@@ -39,8 +39,8 @@ resource "aws_security_group" "demo-sg" {
     }
 }
 
-output "common-sg" {
-  value = aws_security_group.demo-sg.id
+output "common_sg" {
+  value = [aws_security_group.demo-sg.id]
 }
 resource "aws_instance" "vm-nginx" {
     ami = "ami-0d0ad8bb301edb745"

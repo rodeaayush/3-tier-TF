@@ -16,5 +16,5 @@ module "ec2"{
   module "rds" {
     source = "./rds"
      subnet_ID = module.vpc.private_subnet_ids
-     SG = module.ec2.common-sg
+     SG = module.ec2.common_sg
   }

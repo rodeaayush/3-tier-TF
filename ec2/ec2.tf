@@ -2,7 +2,7 @@ resource "aws_instance" "vm-nginx" {
     ami = "ami-0d0ad8bb301edb745"
     instance_type = "t2.micro"
     subnet_id = var.public-nginx
-    vpc_security_group_ids = var.SG
+    vpc_security_group_ids = aws_security_group.demo-sg.id
     key_name = "ubuntukey"
 
     tags = {
@@ -23,7 +23,7 @@ resource "aws_instance" "vm-db" {
     ami = "ami-0d0ad8bb301edb745"
     instance_type = "t2.micro"
     subnet_id = var.private-db
-    vpc_security_group_ids = var.SG
+    vpc_security_group_ids = aws_security_group.demo-sg.id
     key_name = "ubuntukey"
 
     tags = {
@@ -35,7 +35,7 @@ resource "aws_instance" "vm-tom" {
     ami = "ami-0d0ad8bb301edb745"
     instance_type = "t2.micro"
     subnet_id = var.private-tom
-    vpc_security_group_ids = var.SG
+    vpc_security_group_ids = aws_security_group.demo-sg.id
     key_name = "ubuntukey"
 
     tags = {

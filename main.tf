@@ -4,7 +4,6 @@ provider "aws" {
 module "ec2"{
   source  = "./ec2"
   vpc_id = module.vpc.vpc_id
-  SG = module.ec2.common-sg
   private-tom = module.vpc.private_subnet_id
   private-db = module.vpc.private_db_subnet_id
   public-nginx = module.vpc.public_subnet_id
